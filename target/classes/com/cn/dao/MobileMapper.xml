@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.dao.MobileMapper">
+	<resultMap id="mobileResultMap" type="Mobile">
+		<id property="id" column="id" jdbcType="INTEGER"/>
+		<result property="phonenumber" column="phonenumber" jdbcType="VARCHAR"/>
+		<association property="user" javaType="User">
+			<id column="id" property="id" jdbcType="INTEGER" />
+			<result column="user_id" property="userId" jdbcType="INTEGER" />
+			<result column="user_name" property="userName" jdbcType="VARCHAR" />
+			<result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+			<result column="user_password" property="userPassword"
+				jdbcType="VARCHAR" />
+			<result column="last_login_time" property="lastLoginTime"
+				jdbcType="TIMESTAMP" />
+			<result column="user_status" property="userStatus" jdbcType="INTEGER" />
+			<result column="user_type_code" property="userTypeCode"
+				jdbcType="INTEGER" />
+
+		</association>
+	</resultMap>
+	
+	<!--多表查询操作 -->
+	<select id="selectMobile" parameterType="int" resultMap="mobileResultMap">
+		<!--分别为mobile的主键id与user的主键id赋值别名,避免因为两个表字段名称相同而注入到对应对象名称冲突 -->
+		select m.*,u.* from user_mobile
+		m,user_login  u where m.userid = u.user_id and m.mid = #{id}
+	</select>
+
+</mapper>

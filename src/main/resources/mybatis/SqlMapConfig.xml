@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 别名设置(可以简写包的路径),别名不区分大小写 -->
+	<typeAliases>
+		<package name="com.cn.model" />
+	</typeAliases>
+</configuration>
